@@ -8,6 +8,7 @@ export default {
   start: "February 2020",
   end: "January 2021",
   location: "Tehran, Iran",
+  badges: ["iOS", "Swift", "Banking"],
   bullets: [
     {
       text: "Started as a junior iOS developer with no prior Swift or frontend experience; after 3 months of training, joined the team building Eghtesad Novin Bank's mobile banking iOS application.",

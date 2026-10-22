@@ -29,9 +29,9 @@
 
   <div class="side">
     <h1>{about.name}</h1>
-    <p class="title">{about.title} <span class="dim">·</span> software engineering & AI agents <span class="dim">·</span> {about.location}</p>
+    <p class="title">{about.title} <span class="dim">·</span> {about.location}</p>
 
-    <p class="ask">What are you hiring for?</p>
+    <p class="ask">What are you looking for?</p>
     <ul class="menu">
       {#each paths as p}
         <li>

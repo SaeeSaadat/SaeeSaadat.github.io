@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte'
-  import { experience, projects, skills } from '../content'
+  import { education, experience, projects, skills } from '../content'
   import { ui, BUFFERS, type BufId } from '../lib/state.svelte'
 
   let { go, query = '' }: { go: (b: BufId, focus?: number, anchor?: string) => void; query?: string } = $props()
@@ -23,6 +23,9 @@
     ...projects.flatMap(p => p.bullets.map(bullet('project', 'projects', p.name))),
     ...skills.core.map(c => ({ kind: 'skill', title: c.name, text: c.where, open: () => go('skills') })),
     ...skills.groups.flatMap(g => g.items.map(i => ({ kind: 'skill', title: i, text: g.name, open: () => go('skills') }))),
+    ...education.publications.map(p => ({
+      kind: 'paper', title: p.title, text: `${p.venue}${p.award ? ` · ${p.award}` : ''}`, open: () => go('education'),
+    })),
     ...lensItems,
     ...fileItems,
   ]
@@ -121,6 +124,7 @@
   .kind.skill { color: var(--se); }
   .kind.lens { color: var(--accent); }
   .kind.file { color: var(--blue); }
+  .kind.paper { color: var(--green); }
   .body { display: flex; flex-direction: column; min-width: 0; }
   strong { font-size: 0.9rem; }
   .text { font: 0.9rem/1.5 var(--sans); color: var(--fg-soft); }

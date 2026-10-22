@@ -2,7 +2,7 @@ import type { About } from '../lib/types'
 
 export default {
   name: "Saee Saadat",
-  title: "Software Engineer",
+  title: "Software Engineer & AI Agent Developer",
   location: "Bonn, Germany",
   linkedin: "https://linkedin.com/in/saeesaadat",
   github: "https://github.com/saeesaadat",

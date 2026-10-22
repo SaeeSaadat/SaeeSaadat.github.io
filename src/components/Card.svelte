@@ -3,8 +3,8 @@
   import { ui } from '../lib/state.svelte'
   import { score, top, match, lean, DIM_BELOW } from '../lib/relevance'
 
-  let { id, title, role = '', when = '', where = '', note = '', bullets }:
-    { id: string; title: string; role?: string; when?: string; where?: string; note?: string; bullets: Bullet[] } = $props()
+  let { id, title, role = '', when = '', where = '', note = '', badges = [], bullets }:
+    { id: string; title: string; role?: string; when?: string; where?: string; note?: string; badges?: string[]; bullets: Bullet[] } = $props()
 
   let open = $derived(!!ui.folds[id])
   let best = $derived(top(bullets, ui.focus))
@@ -18,6 +18,7 @@
     <div class="titles">
       <h3>{title}</h3>
       {#if role}<p class="role">{role}</p>{/if}
+      {#if badges.length}<p class="badges">{#each badges as b}<span class="badge">{b}</span>{/each}</p>{/if}
     </div>
     <div class="meta">
       {#if when}<span>{when}</span>{/if}
@@ -62,6 +63,11 @@
   .cold { opacity: 0.72; }
   header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 2rem; }
   h3 { margin: 0; font: 700 1.3rem/1.3 var(--mono); color: var(--yellow); }
+  .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.55rem 0 0; }
+  .badge {
+    display: inline-block; padding: 0.1rem 0.55rem; border-radius: 999px;
+    font: 600 0.72rem var(--mono); color: var(--green); border: 1px solid color-mix(in srgb, var(--green) 60%, transparent);
+  }
   .role { margin: 0.2rem 0 0; color: var(--blue); font-weight: 600; }
   .meta { display: flex; flex-direction: column; align-items: flex-end; font: 0.85rem/1.6 var(--mono); color: var(--dim); }
   .match { display: flex; align-items: center; gap: 0.8rem; margin: 0.9rem 0 0.6rem; font: 0.8rem var(--mono); color: var(--dim); }

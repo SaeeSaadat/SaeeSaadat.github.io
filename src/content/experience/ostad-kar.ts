@@ -5,9 +5,10 @@ export default {
   company: "Ostad Kar",
   role: "Software Engineer",
   type: "Full-time",
-  start: "January 2021",
-  end: "December 2022",
+  start: "July 2021",
+  end: "June 2022",
   location: "Tehran, Iran",
+  badges: ["Python", "CI/CD"],
   bullets: [
     {
       text: "Maintained and developed features for the core backend components built with Python, Flask, Docker, PostgreSQL, Cassandra, Redis and RabbitMQ.",

@@ -11,7 +11,7 @@
   import Finder from './components/Finder.svelte'
 
   const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  const range = (a: { start: string; end: string }) => `${a.start} – ${a.end}`
+  const range = (a: { start?: string; end?: string }) => [a.start, a.end].filter(Boolean).join(' – ')
 
   let main: HTMLElement
   let pos = $state('Top')
@@ -231,7 +231,7 @@
 
   {#if ui.tree}<button class="scrim" onclick={() => (ui.tree = false)} aria-label="Close file tree"></button>{/if}
   <aside class="tree" class:open={ui.tree} aria-label="File tree">
-    <div class="root">~/saee</div>
+    <div class="root">~/Saee</div>
     <ul>
       {#each BUFFERS as b}
         <li>
@@ -286,6 +286,9 @@
             </div>
           </header>
           <p class="summary">{about.summary[summaryKey(ui.focus)]}</p>
+          {#each education.publications.filter(p => p.award) as p}
+            <p class="highlight">★ <b>{p.award}</b>, {p.venue}: <button class="link" onclick={() => go('education')}>{p.title.split(':')[0]}</button></p>
+          {/each}
           <div class="facts">
             <div>
               <h2 class="section"><span>##</span> Languages</h2>
@@ -309,11 +312,11 @@
           </div>
           {#if ui.buf === 'experience'}
             {#each experience as e (e.company)}
-              <Card id={slug(e.company)} title={e.company} role={e.role} when={range(e)} where={e.location} note={e.notes} bullets={e.bullets} />
+              <Card id={slug(e.company)} title={e.company} role={e.role} when={range(e)} where={e.location} note={e.notes} badges={e.badges} bullets={e.bullets} />
             {/each}
           {:else}
             {#each projects as p (p.name)}
-              <Card id={slug(p.name)} title={p.name} role={p.tech} when={p.period} bullets={p.bullets} />
+              <Card id={slug(p.name)} title={p.name} role={p.tech} when={p.period} badges={p.badges} bullets={p.bullets} />
             {/each}
           {/if}
         {:else if ui.buf === 'skills'}
@@ -333,6 +336,16 @@
                 {#if d.location}<span>{d.location}</span>{/if}
                 {#if d.gpa}<span class="gpa">GPA {d.gpa}</span>{/if}
               </div>
+            </article>
+          {/each}
+          <h2 class="section"><span>##</span> Publications</h2>
+          {#each education.publications as p}
+            <article class="pub">
+              {#if p.award}<span class="award">★ {p.award}</span>{/if}
+              <h3><a href={p.url} target="_blank" rel="noopener">{p.title}</a></h3>
+              <p class="authors">{#each p.authors.split(', ') as a, i}{#if a === about.name}<b>{a}</b>{:else}{a}{/if}{i < p.authors.split(', ').length - 1 ? ', ' : ''}{/each}</p>
+              <p class="venue">{p.venue}</p>
+              {#if p.summary}<p class="dim">{p.summary}</p>{/if}
             </article>
           {/each}
           <h2 class="section"><span>##</span> Certifications</h2>
@@ -487,6 +500,17 @@
   .edu-meta { display: flex; flex-direction: column; align-items: flex-end; font: 0.85rem/1.7 var(--mono); color: var(--dim); }
   .gpa { color: var(--green); }
   .cert { margin: 0.4rem 0; }
+  .pub { padding: 1.3rem 1.5rem; margin-bottom: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; }
+  .pub h3 { margin: 0.2rem 0 0.4rem; font: 700 1.05rem/1.4 var(--mono); }
+  .pub h3 a { color: var(--yellow); text-decoration: none; }
+  .pub h3 a:hover { text-decoration: underline; }
+  .pub .authors { margin: 0; font-size: 0.92rem; color: var(--fg-soft); }
+  .pub .authors b { color: var(--fg); }
+  .pub .venue { margin: 0.3rem 0; font: 0.85rem var(--mono); color: var(--blue); }
+  .pub .dim { margin: 0.4rem 0 0; font-size: 0.92rem; }
+  .award { display: inline-block; font: 700 0.75rem var(--mono); color: var(--bg); background: var(--yellow); padding: 0.15rem 0.6rem; border-radius: 4px; }
+  .highlight { margin: -1.2rem 0 2.2rem; font-size: 0.95rem; color: var(--fg-soft); }
+  .highlight b { color: var(--yellow); }
 
   .shell { font: 1rem/1.8 var(--mono); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem 1.5rem; overflow-x: auto; }
   .shell .c { color: var(--dim); font-style: italic; }

@@ -20,7 +20,7 @@ const hash = location.hash.slice(1)
 export const ui = $state({
   focus: q != null && !isNaN(+q) ? Math.min(100, Math.max(0, +q)) / 100 : 0.5,
   buf: (BUFFERS.some(b => b.id === hash) ? hash : 'dashboard') as BufId,
-  theme: (THEMES as readonly string[]).includes(read('theme') ?? '') ? read('theme')! : 'kanagawa',
+  theme: (THEMES as readonly string[]).includes(read('theme') ?? '') ? read('theme')! : 'catppuccin',
   folds: {} as Record<string, boolean>,
   lens: params.get('lens') ?? '', // skills page category, '' = all
   tree: false, // mobile drawer

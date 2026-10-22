@@ -5,9 +5,10 @@ export default {
   company: "AYOT",
   role: "Founder, Software Engineer",
   type: "Founder / Full-time",
-  start: "January 2021",
-  end: "December 2024",
+  start: "July 2021",
+  end: "September 2024",
   location: "Sharif Innovation Park, Tehran",
+  badges: ["Entrepreneurship", "Leadership", "IoT", "Python"],
   bullets: [
     {
       text: "Founded an IoT & smart home startup at Sharif Innovation Park; following a passion for entrepreneurship and connected devices.",

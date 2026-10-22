@@ -6,6 +6,7 @@ export default {
   tech: "MQTT, Python, Arduino, Home Assistant",
   period: "2023-Present",
   tags: ["iot", "backend", "security", "python"],
+  badges: ["IoT", "Security", "Python"],
   bullets: [
     {
       text: "Built a personal MQTT-based IoT platform connecting custom Arduino gadgets over Wi-Fi, with a Python backend managing device state and events.",

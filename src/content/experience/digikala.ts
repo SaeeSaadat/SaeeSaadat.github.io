@@ -5,10 +5,11 @@ export default {
   company: "Digikala",
   role: "Software Engineer",
   type: "Full-time",
-  start: "January 2022",
-  end: "December 2023",
+  start: "April 2022",
+  end: "July 2023",
   location: "Tehran, Iran",
   notes: "Digikala is the largest e-commerce platform in Iran.",
+  badges: ["High Traffic", "System Design", "PHP", "Go"],
   bullets: [
     {
       text: "Worked on both the customer facing and vendor facing components of the platform.",

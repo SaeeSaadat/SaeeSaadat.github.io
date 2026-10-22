@@ -8,6 +8,7 @@ export default {
   start: "July 2025",
   end: "Present",
   location: "Düsseldorf, Germany",
+  badges: ["AI Agents", "Java", "Google Cloud", "Leadership"],
   bullets: [
     {
       text: "Worked with Java, Maven, Quarkus, PostgreSQL, Python, Google ADK, FastMCP, K8s, AngularJS, Google Cloud and Keycloak on an Enterprise multi-modular Java-based MES for the metals industry.",

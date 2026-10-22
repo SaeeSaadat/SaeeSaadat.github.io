@@ -3,10 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saee Saadat · Software Engineer</title>
-    <meta name="description" content="Saee Saadat, software engineer in Bonn: software engineering and AI agents. Interactive CV you can tune toward the role you're hiring for." />
-    <meta property="og:title" content="Saee Saadat · Software Engineer" />
-    <meta property="og:description" content="Software engineering and AI agents. Drag the slider to see the experience that fits your role." />
+    <title>Saee Saadat · Software Engineer & AI Agent Developer</title>
+    <meta name="description" content="Saee Saadat is a software engineer and AI agent developer in Bonn, Germany: Java and Python backends, cloud, multi-agent systems and MCP servers. Interactive CV." />
+    <meta name="author" content="Saee Saadat" />
+    <link rel="canonical" href="https://saee.codes/" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://saee.codes/" />
+    <meta property="og:title" content="Saee Saadat · Software Engineer & AI Agent Developer" />
+    <meta property="og:description" content="Java and Python backends, cloud, multi-agent systems and MCP servers. Drag the slider to see the experience that fits your role." />
+    <meta property="og:image" content="https://saee.codes/portrait.jpg" />
+    <meta property="profile:first_name" content="Saee" />
+    <meta property="profile:last_name" content="Saadat" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Tells search engines who this page is about; sameAs links this site to the same person's other profiles -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Saee Saadat",
+        "url": "https://saee.codes/",
+        "image": "https://saee.codes/portrait.jpg",
+        "jobTitle": "Software Engineer & AI Agent Developer",
+        "email": "mailto:me@saee.codes",
+        "address": { "@type": "PostalAddress", "addressLocality": "Bonn", "addressCountry": "DE" },
+        "worksFor": { "@type": "Organization", "name": "PSI Software" },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "University of Bonn" },
+          { "@type": "CollegeOrUniversity", "name": "Sharif University of Technology" }
+        ],
+        "knowsAbout": ["Software Engineering", "Backend Development", "Java", "Python", "AI Agents", "Multi-agent Systems", "Model Context Protocol", "Google Cloud", "Kubernetes"],
+        "sameAs": [
+          "https://github.com/saeesaadat",
+          "https://linkedin.com/in/saeesaadat",
+          "https://aclanthology.org/2026.eacl-long.346/"
+        ]
+      }
+    </script>
+
     <meta name="theme-color" content="#1f1f28" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231f1f28'/><text x='4' y='23' font-family='monospace' font-size='18' fill='%23957fb8'>&gt;_</text></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,8 +49,44 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="app"></div>
-    <noscript>Saee Saadat, Software Engineer. Email me@saee.codes · github.com/saeesaadat · linkedin.com/in/saeesaadat</noscript>
+    <!-- Plain-HTML summary for crawlers and link previews that don't run JavaScript. The app replaces it on load
+         (see src/main.ts). Keep it roughly in sync with src/content when something big changes. -->
+    <div id="app">
+      <main style="max-width: 46rem; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif">
+        <h1>Saee Saadat</h1>
+        <p><strong>Software Engineer & AI Agent Developer</strong> in Bonn, Germany.</p>
+        <p>
+          Software engineer with a backend focus in Java and Python, deploying on Google Cloud with Terraform, Docker and
+          Kubernetes, who also architects multi-agent systems and MCP servers with Google ADK.
+        </p>
+        <h2>Experience</h2>
+        <ul>
+          <li>PSI Software: Working Student, Software Engineer (2025–present): enterprise Java MES; led the AI agent and chatbot initiative</li>
+          <li>AYOT: Founder, Software Engineer (2021–2024): IoT and smart home startup, led a team of 10 engineers</li>
+          <li>Digikala: Software Engineer (2022–2023): Iran's largest e-commerce platform</li>
+          <li>Ostad Kar: Software Engineer (2021–2022)</li>
+          <li>Farazpardazan: iOS App Developer (2020–2021)</li>
+          <li>Karyar: Software Engineering Mentor (volunteer)</li>
+          <li>Sharif University of Technology: Teaching &amp; Research Assistant</li>
+        </ul>
+        <h2>Education</h2>
+        <ul>
+          <li>M.Sc. Computer Science, University of Bonn</li>
+          <li>B.Sc. Computer Engineering, Sharif University of Technology</li>
+        </ul>
+        <h2>Publications</h2>
+        <p>
+          <a href="https://aclanthology.org/2026.eacl-long.346/">HarfoSokhan: A Comprehensive Parallel Dataset for Transitions between Persian Colloquial and Formal Variations</a>,
+          EACL 2026, Resource Paper Award.
+        </p>
+        <p>
+          <a href="mailto:me@saee.codes">me@saee.codes</a> ·
+          <a href="https://github.com/saeesaadat">GitHub</a> ·
+          <a href="https://linkedin.com/in/saeesaadat">LinkedIn</a> ·
+          <a href="/cv.pdf">CV (PDF)</a>
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

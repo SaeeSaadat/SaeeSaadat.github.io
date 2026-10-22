@@ -6,6 +6,7 @@ export default {
   tech: "FastAPI, Python, Yjs, WebSockets",
   period: "2024-Present",
   tags: ["backend", "python", "research"],
+  badges: ["Python", "Real-time", "Research"],
   bullets: [
     {
       text: "Active contributor to a real-time scientific survey platform for the Behavioral Security Research Group at the University of Bonn.",

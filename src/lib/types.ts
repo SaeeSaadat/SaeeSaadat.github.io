@@ -11,10 +11,11 @@ export type Experience = {
   company: string
   role: string
   type?: string
-  start: string
-  end: string
+  start?: string
+  end?: string
   location?: string
   notes?: string
+  badges?: string[] // shown as pills next to the title, e.g. "Entrepreneurship"
   bullets: Bullet[]
 }
 
@@ -24,6 +25,7 @@ export type Project = {
   tech?: string
   period?: string
   tags?: string[]
+  badges?: string[]
   bullets: Bullet[]
 }
 
@@ -42,6 +44,7 @@ export type About = {
 export type Education = {
   degrees: { institution: string; degree: string; start: string; end: string; location?: string; gpa?: string; notes?: string }[]
   certifications: { name: string; issuer: string; date: string; url?: string }[]
+  publications: { title: string; authors: string; venue: string; year: string; url: string; award?: string; summary?: string }[]
 }
 
 export type Track = 'ai' | 'se' | 'both' | 'other'

@@ -6,6 +6,7 @@ export default {
   tech: "Java, Quarkus, GCP, Terraform, PostgreSQL, Redis, S3",
   period: "2025-2026",
   tags: ["backend", "java", "cloud", "devops", "leadership"],
+  badges: ["Entrepreneurship", "Java", "Tech Lead", "Infrastructure as Code"],
   bullets: [
     {
       text: "Sole architect and tech lead on a production-grade Java/Quarkus backend with Domain-Driven Design, translating a non-technical stakeholder's use cases into user stories through full requirement engineering.",
