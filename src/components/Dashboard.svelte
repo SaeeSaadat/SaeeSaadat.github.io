@@ -76,10 +76,10 @@
 
     <p class="ask">Tools I reach for:</p>
     <ul class="stack">
-      {#each ranked as { name, w } (name)}
+      {#each ranked as { name } (name)}
         {@const [vb, d, color] = icons[name]}
         <li animate:flip={{ duration: 350 }}>
-          <button class:faded={w < 0.4} style:--brand={color || null} title={name} aria-label="{name}: see it in my skills" onclick={() => show(name)}>
+          <button style:--brand={color || null} title={name} aria-label="{name}: see it in my skills" onclick={() => show(name)}>
             <svg viewBox={vb} aria-hidden="true"><path d={d} /></svg>
           </button>
         </li>
@@ -140,13 +140,12 @@
   .stack { list-style: none; margin: 0; padding: 0.3em 1ch; display: flex; flex-wrap: wrap; gap: 0.25rem; }
   .stack button {
     all: unset; cursor: pointer; display: grid; place-items: center; padding: 0.4rem; border-radius: 8px;
-    color: var(--fg-soft); transition: opacity 0.3s, transform 0.15s, background 0.15s, color 0.15s;
+    color: var(--fg-soft); transition: transform 0.15s, background 0.15s, color 0.15s;
   }
   .stack button:hover, .stack button:focus-visible {
-    background: var(--bg-hl); transform: translateY(-2px); opacity: 1; filter: none; color: var(--brand, var(--fg));
+    background: var(--bg-hl); transform: translateY(-2px); color: var(--brand, var(--fg));
   }
   .stack button:focus-visible { outline: 2px solid var(--accent); }
   .stack svg { width: 1.6rem; height: 1.6rem; fill: currentColor; }
-  .stack .faded { opacity: 0.35; }
   .note { color: var(--dim); font-size: 0.85em; margin: 0.2em 0 0; padding-left: 1ch; }
 </style>

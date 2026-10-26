@@ -77,7 +77,7 @@
   <div class="tiles">
     {#each core as { x, w } (x.name)}
       {@const hit = hits.has(x.name)}
-      <div class="tile {x.track}" class:hit class:faded={lens ? !hit : w < 0.4} class:hot={!lens && w > 0.6} animate:flip={{ duration: 350 }}>
+      <div class="tile {x.track}" class:hit class:hot={!lens && w > 0.6} animate:flip={{ duration: 350 }}>
         <span class="track">{label[x.track]}</span>
         <strong>{x.name}</strong>
         <span class="where">{x.where}</span>
@@ -89,10 +89,10 @@
 <section>
   <h2 class="section"><span>##</span> Full toolbox</h2>
   <div class="groups">
-    {#each groups as { x, h, w } (x.name)}
-      <div class="group {x.track}" class:faded={lens ? h === 0 : w < 0.4} animate:flip={{ duration: 350 }}>
+    {#each groups as { x } (x.name)}
+      <div class="group {x.track}" animate:flip={{ duration: 350 }}>
         <h3>{x.name}</h3>
-        <ul>{#each x.items as it}<li id={skillId(it)} class:hit={hits.has(it)} class:off={lens && !hits.has(it)} class:flash={ui.flash === it}>{#if icons[it]}<svg viewBox={icons[it][0]} style:color={icons[it][2] || null} aria-hidden="true"><path d={icons[it][1]} /></svg>{/if}{it}</li>{/each}</ul>
+        <ul>{#each x.items as it}<li id={skillId(it)} class:hit={hits.has(it)} class:flash={ui.flash === it}>{#if icons[it]}<svg viewBox={icons[it][0]} style:color={icons[it][2] || null} aria-hidden="true"><path d={icons[it][1]} /></svg>{/if}{it}</li>{/each}</ul>
       </div>
     {/each}
   </div>
@@ -139,7 +139,6 @@
   .tile.ai .track { color: var(--ai); }
   .tile.se .track { color: var(--se); }
   .where { font-size: 0.9rem; color: var(--fg-soft); line-height: 1.45; }
-  .faded { opacity: 0.4; }
 
   .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 0.9rem; }
   .group { padding: 1rem 1.1rem; border: 1px solid var(--border); border-radius: 8px; transition: opacity 0.3s; }
@@ -160,7 +159,6 @@
     100% { box-shadow: 0 0 0 0 transparent; }
   }
   .group li.hit { background: var(--accent); color: var(--bg); font-weight: 600; }
-  .group li.off { opacity: 0.45; }
 
   @media (max-width: 760px) {
     .lenses { flex-wrap: nowrap; overflow-x: auto; margin: -0.4rem -1rem 1.2rem; padding: 0 1rem 0.4rem; scrollbar-width: none; }
