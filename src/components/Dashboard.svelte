@@ -1,10 +1,14 @@
 <script lang="ts">
   import { about } from '../content'
   import { drawAscii } from '../lib/ascii'
-  import { ui, CV_URL, CV_NAME, type BufId } from '../lib/state.svelte'
+  import { flip } from 'svelte/animate'
+  import { ui, CV_URL, CV_NAME, skillId, type BufId } from '../lib/state.svelte'
+  import { trackWeight } from '../lib/relevance'
+  import type { Track } from '../lib/types'
   import FocusDial from './FocusDial.svelte'
+  import { icons } from '../lib/icons'
 
-  let { go }: { go: (b: BufId, focus?: number) => void } = $props()
+  let { go }: { go: (b: BufId, focus?: number, anchor?: string) => void } = $props()
   let canvas: HTMLCanvasElement
   let ready = $state(false)
   // As tall as the screen comfortably allows on desktop; width-limited on phones (portrait is 3:4)
@@ -22,6 +26,22 @@
     { key: 'e', label: 'Hiring for software engineering', hint: 'Java, Python, system design, cloud, high-traffic services', focus: 0 },
     { key: 'f', label: 'Show me everything', hint: 'balanced view of all experience', focus: 0.5 },
   ]
+  // Names must match a toolbox item in skills.ts: clicking jumps there
+  const stack: [string, Track][] = [
+    ['Python', 'both'], ['MCP', 'ai'], ['Google ADK', 'ai'], ['Claude Code', 'ai'], ['Antigravity', 'ai'],
+    ['Spec-driven development', 'ai'], ['Java', 'se'], ['Go', 'se'], ['Kotlin', 'se'], ['TypeScript', 'se'], ['FastAPI', 'se'],
+    ['Quarkus', 'se'], ['Spring Boot', 'se'], ['PostgreSQL', 'se'], ['Redis', 'se'], ['Kafka', 'se'], ['RabbitMQ', 'se'],
+    ['Docker', 'se'], ['Kubernetes', 'se'], ['Google Cloud', 'se'], ['Terraform', 'se'], ['GitHub Actions', 'se'],
+  ]
+  let ranked = $derived(
+    stack.map(([name, track], i) => ({ name, i, w: trackWeight(track, ui.focus) })).sort((a, b) => b.w - a.w || a.i - b.i),
+  )
+  function show(name: string) {
+    ui.lens = ''
+    ui.flash = name
+    setTimeout(() => ui.flash === name && (ui.flash = ''), 2500)
+    go('skills', undefined, skillId(name))
+  }
 </script>
 
 <div class="dash">
@@ -53,6 +73,18 @@
     <p class="ask">Or fine-tune it yourself:</p>
     <div class="dialrow"><FocusDial /></div>
     <p class="note">The whole site re-ranks as you drag: relevant work rises and lights up, the rest fades.</p>
+
+    <p class="ask">Tools I reach for:</p>
+    <ul class="stack">
+      {#each ranked as { name, w } (name)}
+        {@const [vb, d, color] = icons[name]}
+        <li animate:flip={{ duration: 350 }}>
+          <button class:faded={w < 0.4} style:--brand={color || null} title={name} aria-label="{name}: see it in my skills" onclick={() => show(name)}>
+            <svg viewBox={vb} aria-hidden="true"><path d={d} /></svg>
+          </button>
+        </li>
+      {/each}
+    </ul>
 
     <ul class="menu small">
       <li><button onclick={() => go('readme')}><span class="key">[r]</span> README.md</button></li>
@@ -105,5 +137,16 @@
     .menu button { padding: 0.55em 1ch; }
     .cv { display: flex; }
   }
+  .stack { list-style: none; margin: 0; padding: 0.3em 1ch; display: flex; flex-wrap: wrap; gap: 0.25rem; }
+  .stack button {
+    all: unset; cursor: pointer; display: grid; place-items: center; padding: 0.4rem; border-radius: 8px;
+    color: var(--fg-soft); transition: opacity 0.3s, transform 0.15s, background 0.15s, color 0.15s;
+  }
+  .stack button:hover, .stack button:focus-visible {
+    background: var(--bg-hl); transform: translateY(-2px); opacity: 1; filter: none; color: var(--brand, var(--fg));
+  }
+  .stack button:focus-visible { outline: 2px solid var(--accent); }
+  .stack svg { width: 1.6rem; height: 1.6rem; fill: currentColor; }
+  .stack .faded { opacity: 0.35; }
   .note { color: var(--dim); font-size: 0.85em; margin: 0.2em 0 0; padding-left: 1ch; }
 </style>

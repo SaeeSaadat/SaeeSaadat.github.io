@@ -2,8 +2,9 @@
   import { flip } from 'svelte/animate'
   import { slide } from 'svelte/transition'
   import { skills, experience, projects } from '../content'
-  import { ui } from '../lib/state.svelte'
+  import { ui, skillId } from '../lib/state.svelte'
   import { trackWeight } from '../lib/relevance'
+  import { icons } from '../lib/icons'
 
   const known = new Set([...skills.core.map(c => c.name), ...skills.groups.flatMap(g => g.items)])
   for (const l of skills.lenses)
@@ -91,7 +92,7 @@
     {#each groups as { x, h, w } (x.name)}
       <div class="group {x.track}" class:faded={lens ? h === 0 : w < 0.4} animate:flip={{ duration: 350 }}>
         <h3>{x.name}</h3>
-        <ul>{#each x.items as it}<li class:hit={hits.has(it)} class:off={lens && !hits.has(it)}>{it}</li>{/each}</ul>
+        <ul>{#each x.items as it}<li id={skillId(it)} class:hit={hits.has(it)} class:off={lens && !hits.has(it)} class:flash={ui.flash === it}>{#if icons[it]}<svg viewBox={icons[it][0]} style:color={icons[it][2] || null} aria-hidden="true"><path d={icons[it][1]} /></svg>{/if}{it}</li>{/each}</ul>
       </div>
     {/each}
   </div>
@@ -149,6 +150,14 @@
   .group li {
     font-size: 0.85rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--bg-hl); color: var(--fg);
     transition: background 0.2s, color 0.2s, opacity 0.2s;
+    display: inline-flex; align-items: center; gap: 0.4em;
+  }
+  .group li svg { width: 1.3em; height: 1.3em; fill: currentColor; flex: none; }
+  .group li.hit svg { color: inherit !important; }
+  .group li.flash { animation: flash 2.4s ease-out; scroll-margin: 40vh; }
+  @keyframes flash {
+    0%, 50% { background: var(--accent); color: var(--bg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+    100% { box-shadow: 0 0 0 0 transparent; }
   }
   .group li.hit { background: var(--accent); color: var(--bg); font-weight: 600; }
   .group li.off { opacity: 0.45; }

@@ -31,6 +31,8 @@ export const ui = $state({
   message: '',
 })
 
+export const skillId = (name: string) => 'skill-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
 export const CV_URL = `${import.meta.env.BASE_URL}cv.pdf`
 export const CV_NAME = 'Saee-Saadat-CV.pdf'
 export function downloadCv() {
