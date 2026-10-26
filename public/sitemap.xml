@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://saee.codes/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://saee.codes/</loc>
+    <!-- The landing view draws the photo on a canvas, so crawlers never see an <img>; this tells Google it exists -->
+    <image:image><image:loc>https://saee.codes/photo-big.jpg</image:loc></image:image>
+  </url>
   <url><loc>https://saee.codes/cv.pdf</loc></url>
 </urlset>
